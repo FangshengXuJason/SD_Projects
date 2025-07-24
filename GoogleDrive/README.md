@@ -14,6 +14,7 @@ A modern Google Drive clone built with Next.js, Node.js, and AWS S3 for file sto
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **Next.js 15** - React framework
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
@@ -25,6 +26,7 @@ A modern Google Drive clone built with Next.js, Node.js, and AWS S3 for file sto
 - **React Hot Toast** - Notifications
 
 ### Backend
+
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **TypeScript** - Type safety
@@ -34,6 +36,7 @@ A modern Google Drive clone built with Next.js, Node.js, and AWS S3 for file sto
 - **AWS SDK** - S3 integration
 
 ### Infrastructure
+
 - **Amazon S3** - File storage
 - **PostgreSQL** - Database
 
@@ -72,21 +75,25 @@ GoogleDrive/
 ### Backend Setup
 
 1. **Navigate to backend directory:**
+
    ```bash
    cd back-end
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables:**
+
    ```bash
    cp env.example .env
    ```
 
    Update `.env` with your configuration:
+
    ```env
    PORT=5000
    DATABASE_URL="postgresql://username:password@localhost:5432/google_drive_db"
@@ -98,12 +105,14 @@ GoogleDrive/
    ```
 
 4. **Set up database:**
+
    ```bash
    npx prisma generate
    npx prisma db push
    ```
 
 5. **Start development server:**
+
    ```bash
    npm run dev
    ```
@@ -111,21 +120,25 @@ GoogleDrive/
 ### Frontend Setup
 
 1. **Navigate to frontend directory:**
+
    ```bash
    cd front-end
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Start development server:**
+
    ```bash
    npm run dev
    ```
 
 4. **Open your browser:**
+
    ```
    http://localhost:3000
    ```
@@ -133,11 +146,13 @@ GoogleDrive/
 ## 🔧 API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
 - `GET /api/auth/me` - Get current user
 
 ### Files
+
 - `GET /api/files` - List user files
 - `POST /api/files/upload` - Upload file metadata
 - `GET /api/files/:id` - Get file details
@@ -145,12 +160,14 @@ GoogleDrive/
 - `GET /api/files/:id/download` - Get download info
 
 ### S3
+
 - `POST /api/s3/presigned-url` - Get upload URL
 - `GET /api/s3/presigned-url/:key` - Get download URL
 
 ## 🗄 Database Schema
 
 ### Users
+
 ```sql
 users (
   id, email, password_hash, name, created_at, updated_at
@@ -158,6 +175,7 @@ users (
 ```
 
 ### Files
+
 ```sql
 files (
   id, user_id, name, original_name, size, mime_type,
@@ -178,7 +196,9 @@ files (
 ## 📦 Deployment
 
 ### Backend Deployment
+
 1. Build the application:
+
    ```bash
    npm run build
    ```
@@ -187,7 +207,9 @@ files (
 3. Deploy to your preferred hosting service (Heroku, DigitalOcean, AWS, etc.)
 
 ### Frontend Deployment
+
 1. Build the application:
+
    ```bash
    npm run build
    ```
@@ -195,6 +217,7 @@ files (
 2. Deploy to Vercel, Netlify, or your preferred hosting service
 
 ### AWS S3 Setup
+
 1. Create an S3 bucket
 2. Configure CORS policy
 3. Set up IAM user with S3 permissions

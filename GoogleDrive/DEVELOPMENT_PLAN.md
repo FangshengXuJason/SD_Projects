@@ -1,11 +1,13 @@
 # Google Drive Clone - Development Plan
 
 ## Project Overview
+
 A Google Drive clone with core functionality: upload files, view files, and download files.
 
 ## Tech Stack
 
 ### Frontend
+
 - **Next.js 15** (React 19) - Full-stack framework
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
@@ -17,6 +19,7 @@ A Google Drive clone with core functionality: upload files, view files, and down
 - **React Hot Toast** - Notifications
 
 ### Backend
+
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **TypeScript** - Type safety
@@ -28,6 +31,7 @@ A Google Drive clone with core functionality: upload files, view files, and down
 - **AWS SDK** - S3 integration
 
 ### Infrastructure
+
 - **Amazon S3** - File storage
 - **PostgreSQL** - Database (local development)
 - **Redis** - Caching (local development)
@@ -46,6 +50,7 @@ GoogleDrive/
 ## Core Features Breakdown
 
 ### 1. File Management
+
 - **Upload Files**
   - Drag & drop interface
   - Multiple file selection
@@ -69,6 +74,7 @@ GoogleDrive/
   - Progress tracking
 
 ### 2. User Management
+
 - User registration/login
 - JWT authentication
 - User profile management
@@ -97,6 +103,7 @@ folders (
 ## Development Phases
 
 ### Phase 1: Backend Foundation (Week 1)
+
 1. Set up Node.js/Express server with TypeScript
 2. Configure Prisma with PostgreSQL
 3. Set up AWS S3 integration
@@ -105,6 +112,7 @@ folders (
 6. Set up Redis for caching
 
 ### Phase 2: Frontend Foundation (Week 2)
+
 1. Set up Next.js with additional dependencies
 2. Create authentication pages (login/register)
 3. Implement JWT token management
@@ -112,6 +120,7 @@ folders (
 5. Set up API client with Axios
 
 ### Phase 3: File Upload (Week 3)
+
 1. Create drag & drop upload component
 2. Implement file upload with progress
 3. Handle multiple file uploads
@@ -119,6 +128,7 @@ folders (
 5. Create upload queue management
 
 ### Phase 4: File Viewing (Week 4)
+
 1. Create file grid/list view components
 2. Implement file thumbnails
 3. Add search and filter functionality
@@ -126,12 +136,14 @@ folders (
 5. Implement sorting options
 
 ### Phase 5: File Download (Week 5)
+
 1. Implement single file download
 2. Add batch download functionality
 3. Create download progress indicators
 4. Handle download errors
 
 ### Phase 6: Polish & Testing (Week 6)
+
 1. Add error boundaries and loading states
 2. Implement responsive design
 3. Add unit and integration tests
@@ -141,12 +153,14 @@ folders (
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
 
 ### Files
+
 - `GET /api/files` - List user files
 - `POST /api/files/upload` - Upload file
 - `GET /api/files/:id` - Get file details
@@ -155,10 +169,12 @@ folders (
 - `POST /api/files/batch-download` - Batch download
 
 ### S3
+
 - `POST /api/s3/presigned-url` - Get upload URL
 - `GET /api/s3/presigned-url/:key` - Get download URL
 
 ## Security Considerations
+
 - File type validation
 - File size limits
 - S3 bucket policies
@@ -169,6 +185,7 @@ folders (
 - Secure file access
 
 ## Performance Optimizations
+
 - S3 presigned URLs for direct upload/download
 - Redis caching for frequently accessed data
 - Image thumbnails generation
@@ -177,6 +194,7 @@ folders (
 - CDN for static assets
 
 ## Deployment Strategy
+
 - Frontend: Vercel/Netlify
 - Backend: AWS EC2/DigitalOcean
 - Database: AWS RDS/Managed PostgreSQL
@@ -184,6 +202,7 @@ folders (
 - Caching: AWS ElastiCache/Redis Cloud
 
 ## Next Steps
+
 1. Set up backend project structure
 2. Configure development environment
 3. Set up AWS S3 bucket and IAM roles
