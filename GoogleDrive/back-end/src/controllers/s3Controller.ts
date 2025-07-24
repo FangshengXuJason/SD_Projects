@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
-import AWS from 'aws-sdk';
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { AuthRequest } from '../middleware/auth';
 
-// Configure AWS
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+// Configure AWS S3 client
+const s3Client = new S3Client({
   region: process.env.AWS_REGION || 'us-east-1',
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+  },
 });
-
-const s3 = new AWS.S3();
 
 // @desc    Get presigned upload URL
 // @route   POST /api/s3/presigned-url
@@ -25,14 +26,13 @@ export const getPresignedUploadUrl = async (req: AuthRequest, res: Response) => 
 
     const key = `uploads/${req.user!.id}/${Date.now()}-${fileName}`;
 
-    const params = {
+    const command = new PutObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: key,
       ContentType: fileType,
-      Expires: 300, // 5 minutes
-    };
+    });
 
-    const presignedUrl = await s3.getSignedUrlPromise('putObject', params);
+    const presignedUrl = await getSignedUrl(s3Client, command, { expiresIn: 300 });
 
     res.json({
       success: true,
@@ -57,13 +57,12 @@ export const getPresignedDownloadUrl = async (req: AuthRequest, res: Response) =
   try {
     const { key } = req.params;
 
-    const params = {
+    const command = new GetObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: key,
-      Expires: 300, // 5 minutes
-    };
+    });
 
-    const presignedUrl = await s3.getSignedUrlPromise('getObject', params);
+    const presignedUrl = await getSignedUrl(s3Client, command, { expiresIn: 300 });
 
     res.json({
       success: true,

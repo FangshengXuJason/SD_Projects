@@ -23,6 +23,7 @@ model User {
 
   // Relations
   files File[]
+  folders Folder[]
 
   @@map("users")
 }
