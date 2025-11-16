@@ -22,7 +22,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  files File[]
+  files   File[]
   folders Folder[]
 
   @@map("users")
@@ -55,8 +55,8 @@ model Folder {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  parent Folder?  @relation("FolderHierarchy", fields: [parentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent   Folder?  @relation("FolderHierarchy", fields: [parentId], references: [id])
   children Folder[] @relation("FolderHierarchy")
 
   @@map("folders")
