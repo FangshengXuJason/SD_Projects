@@ -1,155 +1,32 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { AuthRequest } from '../middleware/auth';
 
-const prisma = new PrismaClient();
-
-// @desc    Get all files for user
-// @route   GET /api/files
-// @access  Private
+// Get all files for user - boilerplate
 export const getFiles = async (req: AuthRequest, res: Response) => {
-  try {
-    const files = await prisma.file.findMany({
-      where: { userId: req.user!.id },
-      orderBy: { createdAt: 'desc' },
-    });
-
-    res.json({
-      success: true,
-      count: files.length,
-      data: files,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
+  // TODO: Implement get files logic
+  res.json({ success: true, message: 'Get files endpoint - not implemented' });
 };
 
-// @desc    Upload file
-// @route   POST /api/files/upload
-// @access  Private
+// Upload file - boilerplate
 export const uploadFile = async (req: AuthRequest, res: Response) => {
-  try {
-    const { name, originalName, size, mimeType, s3Key, s3Bucket } = req.body;
-
-    const file = await prisma.file.create({
-      data: {
-        userId: req.user!.id,
-        name,
-        originalName,
-        size: parseInt(size),
-        mimeType,
-        s3Key,
-        s3Bucket,
-      },
-    });
-
-    res.status(201).json({
-      success: true,
-      data: file,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
+  // TODO: Implement upload file logic
+  res.status(201).json({ success: true, message: 'Upload file endpoint - not implemented' });
 };
 
-// @desc    Get single file
-// @route   GET /api/files/:id
-// @access  Private
+// Get single file - boilerplate
 export const getFile = async (req: AuthRequest, res: Response) => {
-  try {
-    const file = await prisma.file.findFirst({
-      where: {
-        id: req.params.id,
-        userId: req.user!.id,
-      },
-    });
-
-    if (!file) {
-      res.status(404);
-      throw new Error('File not found');
-    }
-
-    res.json({
-      success: true,
-      data: file,
-    });
-  } catch (error: any) {
-    res.status(res.statusCode === 200 ? 500 : res.statusCode).json({
-      success: false,
-      error: error.message,
-    });
-  }
+  // TODO: Implement get file logic
+  res.json({ success: true, message: 'Get file endpoint - not implemented' });
 };
 
-// @desc    Delete file
-// @route   DELETE /api/files/:id
-// @access  Private
+// Delete file - boilerplate
 export const deleteFile = async (req: AuthRequest, res: Response) => {
-  try {
-    const file = await prisma.file.findFirst({
-      where: {
-        id: req.params.id,
-        userId: req.user!.id,
-      },
-    });
-
-    if (!file) {
-      res.status(404);
-      throw new Error('File not found');
-    }
-
-    await prisma.file.delete({
-      where: { id: req.params.id },
-    });
-
-    res.json({
-      success: true,
-      data: {},
-    });
-  } catch (error: any) {
-    res.status(res.statusCode === 200 ? 500 : res.statusCode).json({
-      success: false,
-      error: error.message,
-    });
-  }
+  // TODO: Implement delete file logic
+  res.json({ success: true, message: 'Delete file endpoint - not implemented' });
 };
 
-// @desc    Download file
-// @route   GET /api/files/:id/download
-// @access  Private
+// Download file - boilerplate
 export const downloadFile = async (req: AuthRequest, res: Response) => {
-  try {
-    const file = await prisma.file.findFirst({
-      where: {
-        id: req.params.id,
-        userId: req.user!.id,
-      },
-    });
-
-    if (!file) {
-      res.status(404);
-      throw new Error('File not found');
-    }
-
-    // Return file info for download
-    res.json({
-      success: true,
-      data: {
-        downloadUrl: `/api/s3/presigned-url/${file.s3Key}`,
-        fileName: file.originalName,
-        fileSize: file.size,
-      },
-    });
-  } catch (error: any) {
-    res.status(res.statusCode === 200 ? 500 : res.statusCode).json({
-      success: false,
-      error: error.message,
-    });
-  }
+  // TODO: Implement download file logic
+  res.json({ success: true, message: 'Download file endpoint - not implemented' });
 };
